@@ -1,17 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloEts></HelloEts>
+    <tabs>
+      <tab title="page1" to="/page1"></tab>
+      <tab title="page2" to="/page2"></tab>
+    </tabs>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import HelloEts from "./components/HelloEts.vue"
+import { tabs, tab} from 'vant'
+import { getUserInfo, setUserInfo } from '@/api/user'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloEts,
+    tabs,
+    tab
+  },
+  mounted() {
+    getUserInfo().then(res => {
+      console.log(res)
+    })
+    setUserInfo({name: '测试'}).then(res => {
+      console.log(res)
+    })
   }
 }
 </script>
@@ -23,6 +38,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  font-size: 16Px;
 }
 </style>
