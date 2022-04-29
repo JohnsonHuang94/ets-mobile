@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <div>{{userInfo}}</div>
+    <Button @click="setUserInfo">修改用户信息</Button>
     <HelloEts></HelloEts>
     <tabs>
       <tab title="page1" to="/page1"></tab>
@@ -11,22 +13,43 @@
 
 <script>
 import HelloEts from "./components/HelloEts.vue"
-import { tabs, tab} from 'vant'
+import { tabs, tab, Button} from 'vant'
 import { getUserInfo, setUserInfo } from '@/api/user'
 export default {
   name: 'App',
   components: {
     HelloEts,
     tabs,
-    tab
+    tab,
+    Button
+  },
+  data() {
+    return {
+      userInfo: {}
+    }
   },
   mounted() {
-    getUserInfo().then(res => {
-      console.log(res)
-    })
-    setUserInfo({name: '测试'}).then(res => {
-      console.log(res)
-    })
+    this.getUserInfo()
+    this.getUserInfo()
+    this.getUserInfo()
+    this.getUserInfo()
+  },
+  methods: {
+    getUserInfo() {
+      getUserInfo().then(res => {
+        if(res.code === 0){
+          console.log(res.data)
+          this.userInfo = res.data
+        }
+      })
+    },
+    setUserInfo() {
+      setUserInfo({name: '测试'}).then(res => {
+        if(res.code === 0) {
+          this.userInfo = res.data
+        }
+      })
+    },
   }
 }
 </script>
