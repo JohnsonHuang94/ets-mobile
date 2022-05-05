@@ -4,12 +4,14 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state(){
         return {
-            msg: 'hello'
+            userInfo: {
+                name: '王麻子'
+            }
         }
     },
     mutations: {
-        changeMsg(state, payload){
-            state.msg = payload
+        changeUserInfo(state, payload){
+            state.userInfo = payload
         }
     },
     getters: {},
